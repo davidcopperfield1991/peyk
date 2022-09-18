@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"main.go/internal/nats"
 )
 
 type Message struct {
@@ -27,6 +28,12 @@ func sendMessage(c *fiber.Ctx) error {
 	return c.JSON(data)
 }
 
+func receive(c *fiber.Ctx) error {
+	// n := nats.InitNats()
+	nats.SubKon()
+	return c.Context().Err()
+}
+
 func RunFiber() {
 	app := fiber.New()
 
@@ -35,6 +42,7 @@ func RunFiber() {
 	})
 
 	app.Post("/send/:message/:sender/:to", sendMessage)
+	app.Get("/receive", receive)
 
 	log.Fatal(app.Listen(":6060"))
 
