@@ -62,9 +62,10 @@ func SubKon() {
 	log.SetFlags(0)
 	// flag.Set("clusterID", "test-cluster")
 	flag.StringVar(&clusterID, "clusterID", "test-cluster", "khube")
-	flag.StringVar(&clientID, "clientID", "stan-sub", "The NATS Streaming client ID to connect with")
+	// flag.StringVar(&clientID, "clientID", "stan-sub", "The NATS Streaming client ID to connect with")
 
 	// flag.Set()
+	clientID = "stan-sub"
 	flag.Usage = usage
 	flag.Parse()
 
